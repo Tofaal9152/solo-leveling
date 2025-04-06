@@ -3,7 +3,9 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtAccessStrategy, JwtRefreshStrategy } from '../../common/strategy';
-import { AuthUtils } from 'src/common/utils/auth.util';
+import { AuthUtils } from '../../common/utils/authUtils.service';
+
+
 
 @Module({
   imports: [JwtModule.register({})],

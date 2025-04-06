@@ -1,6 +1,6 @@
 import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-import { AuthUtils } from 'src/common/utils/auth.util';
+import { AuthUtils } from 'src/common/utils/authUtils.service';
 import { LoginDto, RegisterDto, UpdateStatsDto } from '../../common/dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
