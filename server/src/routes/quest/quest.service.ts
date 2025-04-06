@@ -1,13 +1,13 @@
 import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { calculateLevelUp } from 'src/common/utils/leveling';
-import { PrismaService } from 'prisma/prisma.service';
 import {
   CreateQuestDto,
   UpdateQuestDto,
   updateQuestStatusDto,
 } from 'src/common/dto/quest.dto';
 import { Cron, CronExpression } from '@nestjs/schedule';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class QuestService {
