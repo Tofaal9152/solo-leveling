@@ -10,13 +10,13 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { GetUser, Public } from 'src/common/decorator';
+import { GetUser, Public } from '../../common/decorator';
 import { QuestService } from './quest.service';
 import {
   CreateQuestDto,
   UpdateQuestDto,
   updateQuestStatusDto,
-} from 'src/common/dto/quest.dto';
+} from '../../common/dto/quest.dto';
 
 @Controller('quest')
 export class QuestController {
