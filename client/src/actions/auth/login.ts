@@ -1,5 +1,4 @@
 import api from "@/lib/api";
-import { useAppDispatch } from "@/redux/hooks";
 import { LoginSchema } from "@/schemas/authSchema";
 import { LoginType } from "@/types/authTypes";
 import axios from "axios";
