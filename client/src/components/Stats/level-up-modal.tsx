@@ -18,7 +18,9 @@ import { StatPoints } from "@/types/QuestTypes";
 
 export function LevelUpModal() {
   const getProfile: getProfileProps = useProfile();
-  const [pointsRemaining, setPointsRemaining] = useState(getProfile.statPoints);
+  const [pointsRemaining, setPointsRemaining] = useState<number>(
+    getProfile?.statPoints || 0
+  );
   const [statPoints, setStatPoints] = useState<StatPoints>({
     Strength: 0,
     Intelligence: 0,
@@ -28,8 +30,8 @@ export function LevelUpModal() {
   });
 
   useEffect(() => {
-    setPointsRemaining(getProfile.statPoints);
-  }, [getProfile.statPoints]);
+    setPointsRemaining(getProfile?.statPoints);
+  }, [getProfile?.statPoints]);
 
   return (
     <>

@@ -7,15 +7,14 @@ import { Quest } from "@/types/QuestTypes";
 
 const TabsContents = () => {
   const quests = useQuests();
-
-  const questList = useMemo(
-    () => ({
-      daily: quests?.results.filter((q: Quest) => q.frequency === "DAILY"),
-      weekly: quests?.results.filter((q: Quest) => q.frequency === "WEEKLY"),
-      monthly: quests?.results.filter((q: Quest) => q.frequency === "MONTHLY"),
-    }),
-    [quests?.results]
-  );
+  const questList = useMemo(() => {
+    const QuestData = quests?.results || [];
+    return {
+      daily: QuestData.filter((q: Quest) => q.frequency === "DAILY"),
+      weekly: QuestData.filter((q: Quest) => q.frequency === "WEEKLY"),
+      monthly: QuestData.filter((q: Quest) => q.frequency === "MONTHLY"),
+    };
+  }, [quests]);
   return (
     <>
       {Object.entries(questList).map(([key, questList]) => (
