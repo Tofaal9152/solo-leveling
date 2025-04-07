@@ -4,6 +4,9 @@ import { AuthModule } from './routes/auth/auth.module';
 import { QuestModule } from './routes/quest/quest.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { PrismaModule } from './prisma/prisma.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+
 
 @Module({
   imports: [
@@ -19,5 +22,7 @@ import { PrismaModule } from './prisma/prisma.module';
     // schedule
     ScheduleModule.forRoot(), // Initialize ScheduleModule
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

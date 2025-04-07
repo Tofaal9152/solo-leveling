@@ -1,20 +1,23 @@
 import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-import { AuthUtils } from 'src/common/utils/authUtils.service';
 import { LoginDto, RegisterDto, UpdateStatsDto } from '../../common/dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
+import * as argon from 'argon2';
 
 @Injectable()
 export class AuthService {
   private readonly logger = new Logger(AuthService.name);
   constructor(
     private prisma: PrismaService,
-    private authUtils: AuthUtils,
+    private jwt: JwtService,
+    private config: ConfigService,
   ) {}
 
   async register(dto: RegisterDto) {
     try {
-      const hash = await this.authUtils.hashData(dto.password);
+      const hash = await this.hashData(dto.password);
 
       const user = await this.prisma.user.create({
         data: {
@@ -24,8 +27,7 @@ export class AuthService {
         },
       });
 
-      const tokens = await this.authUtils.generateTokens(user.id, user.email);
-
+      const tokens = await this.generateTokens(user.id, user.email);
       await this.updateRefreshToken(user.id, tokens.refresh_token);
 
       return {
@@ -53,16 +55,13 @@ export class AuthService {
         throw new ForbiddenException('Invalid email or password');
       }
 
-      const valid = await this.authUtils.verifyData(
-        dto.password,
-        user.password,
-      );
+      const valid = await this.verifyData(dto.password, user.password);
 
       if (!valid) {
         throw new ForbiddenException('Invalid email or password');
       }
 
-      const tokens = await this.authUtils.generateTokens(user.id, user.email);
+      const tokens = await this.generateTokens(user.id, user.email);
 
       await this.updateRefreshToken(user.id, tokens.refresh_token);
 
@@ -74,7 +73,7 @@ export class AuthService {
   }
   // update refresh token utils
   async updateRefreshToken(userId: string, refresh_token: string) {
-    const refreshTokenHash = await this.authUtils.hashData(refresh_token);
+    const refreshTokenHash = await this.hashData(refresh_token);
 
     await this.prisma.user.update({
       where: { id: userId },
@@ -104,16 +103,13 @@ export class AuthService {
         throw new ForbiddenException('User not found');
       }
 
-      const valid = await this.authUtils.verifyData(
-        refresh_token,
-        user.refreshToken,
-      );
+      const valid = await this.verifyData(refresh_token, user.refreshToken);
 
       if (!valid) {
         throw new ForbiddenException('Invalid refresh token');
       }
 
-      const tokens = await this.authUtils.generateTokens(user.id, user.email);
+      const tokens = await this.generateTokens(user.id, user.email);
 
       await this.updateRefreshToken(user.id, tokens.refresh_token);
 
@@ -196,5 +192,30 @@ export class AuthService {
       this.logger.error(error.message);
       throw new ForbiddenException(error.message);
     }
+  }
+  // utils
+  async hashData(data: string): Promise<string> {
+    return await argon.hash(data);
+  }
+
+  async verifyData(data: string, hash: string): Promise<boolean> {
+    return await argon.verify(hash, data);
+  }
+
+  async generateTokens(userId: string, email: string) {
+    const payload = { id: userId, email };
+
+    const [access_token, refresh_token] = await Promise.all([
+      this.jwt.signAsync(payload, {
+        expiresIn: '7d',
+        secret: this.config.get<string>('AT_SECRET'),
+      }),
+      this.jwt.signAsync(payload, {
+        expiresIn: '7d',
+        secret: this.config.get<string>('RT_SECRET'),
+      }),
+    ]);
+
+    return { access_token, refresh_token };
   }
 }
