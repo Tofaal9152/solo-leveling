@@ -14,17 +14,17 @@ export const menuItems = [
 export const TabsTriggerData = [
   {
     name: "Daily Quests",
-    icon: ListTodo,
+    // icon: ListTodo,
     value: "daily",
   },
   {
     name: "Weekly Goals",
-    icon: Calendar,
+    // icon: Calendar,
     value: "weekly",
   },
   {
     name: "Monthly Goals",
-    icon: CalendarDays,
+    // icon: CalendarDays,
     value: "monthly",
   },
 ];

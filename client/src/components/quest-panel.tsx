@@ -37,7 +37,6 @@ export function QuestPanel({ questsData }: { questsData: Quest[] }) {
                 value={tab.value}
                 className="data-[state=active]:bg-gradient-to-r cursor-pointer data-[state=active]:from-blue-600/20 data-[state=active]:to-purple-600/20 data-[state=active]:text-white"
               >
-                <tab.icon className="h-4 w-4 mr-2" />
                 <span>{tab.name}</span>
               </TabsTrigger>
             ))}
