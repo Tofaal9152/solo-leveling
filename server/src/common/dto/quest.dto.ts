@@ -1,25 +1,5 @@
-import {
-  IsDefined,
-  IsEnum,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-  ValidateIf,
-} from 'class-validator';
-// src/common/enums/quest.enums.ts
-
-enum FrequencyEnum {
-  DAILY = 'DAILY',
-  WEEKLY = 'WEEKLY',
-  MONTHLY = 'MONTHLY',
-}
-
-enum StatusEnum {
-  PENDING = 'PENDING',
-  COMPLETED = 'COMPLETED',
-  CANCELLED = 'CANCELLED',
-}
+import { Frequency, Status } from '@prisma/client';
+import { IsDefined, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateIf } from 'class-validator';
 
 export class CreateQuestDto {
   @IsString()
@@ -42,9 +22,9 @@ export class CreateQuestDto {
   @IsNotEmpty()
   healthPoints: number;
 
-  @IsEnum(FrequencyEnum)
+  @IsEnum(Frequency)
   @IsNotEmpty()
-  frequency: FrequencyEnum;
+  frequency: Frequency;
 }
 
 export class UpdateQuestDto {
@@ -68,25 +48,16 @@ export class UpdateQuestDto {
   @IsOptional()
   healthPoints?: number;
 
-  @IsEnum(FrequencyEnum)
+  @IsEnum(Frequency )
   @IsOptional()
-  frequency?: FrequencyEnum;
+  frequency?: Frequency;
 
-  @IsEnum(StatusEnum)
+  @IsEnum(Status )
   @IsOptional()
-  status?: StatusEnum;
+  status?: Status;
 
   // Ensure at least one field is provided for the update
-  @ValidateIf(
-    (dto: Partial<UpdateQuestDto>) =>
-      !dto.title &&
-      !dto.description &&
-      dto.xp === undefined &&
-      dto.statPoints === undefined &&
-      dto.healthPoints === undefined &&
-      dto.frequency === undefined &&
-      dto.status === undefined,
-  )
+  @ValidateIf((dto: Partial<UpdateQuestDto>) => !dto.title && !dto.description && dto.xp === undefined && dto.statPoints === undefined && dto.healthPoints === undefined && dto.frequency === undefined && dto.status === undefined)
   @IsDefined({
     message: 'At least one field must be provided for update.',
   })
@@ -94,7 +65,7 @@ export class UpdateQuestDto {
 }
 
 export class updateQuestStatusDto {
-  @IsEnum(StatusEnum)
+  @IsEnum(Status)
   @IsNotEmpty()
-  status: StatusEnum;
+  status: Status;
 }
