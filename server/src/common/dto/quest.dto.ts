@@ -1,5 +1,25 @@
-import { Frequency, Status } from '@prisma/client';
-import { IsDefined, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateIf } from 'class-validator';
+import {
+  IsDefined,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  ValidateIf,
+} from 'class-validator';
+// src/common/enums/quest.enums.ts
+
+enum FrequencyEnum {
+  DAILY = 'DAILY',
+  WEEKLY = 'WEEKLY',
+  MONTHLY = 'MONTHLY',
+}
+
+enum StatusEnum {
+  PENDING = 'PENDING',
+  COMPLETED = 'COMPLETED',
+  CANCELLED = 'CANCELLED',
+}
 
 export class CreateQuestDto {
   @IsString()
@@ -22,9 +42,9 @@ export class CreateQuestDto {
   @IsNotEmpty()
   healthPoints: number;
 
-  @IsEnum(Frequency as object)
+  @IsEnum(FrequencyEnum)
   @IsNotEmpty()
-  frequency: Frequency;
+  frequency: FrequencyEnum;
 }
 
 export class UpdateQuestDto {
@@ -48,16 +68,25 @@ export class UpdateQuestDto {
   @IsOptional()
   healthPoints?: number;
 
-  @IsEnum(Frequency as object)
+  @IsEnum(FrequencyEnum)
   @IsOptional()
-  frequency?: Frequency;
+  frequency?: FrequencyEnum;
 
-  @IsEnum(Status as object)
+  @IsEnum(StatusEnum)
   @IsOptional()
-  status?: Status;
+  status?: StatusEnum;
 
   // Ensure at least one field is provided for the update
-  @ValidateIf((dto: Partial<UpdateQuestDto>) => !dto.title && !dto.description && dto.xp === undefined && dto.statPoints === undefined && dto.healthPoints === undefined && dto.frequency === undefined && dto.status === undefined)
+  @ValidateIf(
+    (dto: Partial<UpdateQuestDto>) =>
+      !dto.title &&
+      !dto.description &&
+      dto.xp === undefined &&
+      dto.statPoints === undefined &&
+      dto.healthPoints === undefined &&
+      dto.frequency === undefined &&
+      dto.status === undefined,
+  )
   @IsDefined({
     message: 'At least one field must be provided for update.',
   })
@@ -65,7 +94,7 @@ export class UpdateQuestDto {
 }
 
 export class updateQuestStatusDto {
-  @IsEnum(Status as object)
+  @IsEnum(StatusEnum)
   @IsNotEmpty()
-  status: Status;
+  status: StatusEnum;
 }
