@@ -1,11 +1,8 @@
-"use client";
-import { UpdateQuestStatusAction } from "@/actions/quest/updateQuestStatus";
 import { cn } from "@/lib/utils";
 import { Quest } from "@/types/QuestTypes";
 import { Check, Clock } from "lucide-react";
-import { useActionState } from "react";
-import UpdateStatusButton from "./UpdateStatusButton";
 import DeleteQuestButton from "./DeleteQuest";
+import UpdateStatusButton from "./UpdateStatusButton";
 
 const QuestList = ({ quests }: { quests: Quest[] }) => {
   const getStatusIcon = (status: string) => {

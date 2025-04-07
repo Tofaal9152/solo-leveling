@@ -6,7 +6,7 @@ import { Trash } from "lucide-react";
 import { useActionState, useEffect } from "react";
 
 import { DeleteQuestAction } from "@/actions/quest/deleteQuest";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 const DeleteQuestButton = ({ quest }: { quest: Quest }) => {
   const dispatch = useAppDispatch();
   const [, action, isPending] = useActionState(

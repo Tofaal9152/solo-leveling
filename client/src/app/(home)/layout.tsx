@@ -1,5 +1,5 @@
 import { AppSidebar } from "@/components/Sidebar/app-sidebar";
-import { Header } from "@/components/header";
+import { Header } from "@/components/Sidebar/Header/header";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { IsAuthenticatedInDashboard } from "@/hooks/isAuthenticated";
 import { cn } from "@/lib/utils";

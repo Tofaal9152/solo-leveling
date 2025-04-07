@@ -1,10 +1,6 @@
 export const corsConfig = {
-  origin: "https://solo-leveling-rho.vercel.app",
+  origin: [process.env.CORS_ORIGIN1, process.env.CORS_ORIGIN2, process.env.CORS_ORIGIN3],
   methods: 'GET,POST,PUT,DELETE,OPTIONS,PATCH',
   credentials: true,
 };
-export const corsConfigDev = {
-  origin: '*',
-  methods: 'GET,POST,PUT,DELETE,OPTIONS,PATCH',
-  credentials: true,
-};
+

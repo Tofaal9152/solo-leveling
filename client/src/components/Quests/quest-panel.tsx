@@ -1,22 +1,9 @@
-"use client";
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TabsTriggerData } from "@/constants/constants";
-import { Quest } from "@/types/QuestTypes";
-import QuestList from "./QuestLIst";
-import { useMemo } from "react";
+import TabsContents from "./TabsContents";
+import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 
-export function QuestPanel({ questsData }: { questsData: Quest[] }) {
-  const quests = useMemo(
-    () => ({
-      daily: questsData.filter((q) => q.frequency === "DAILY"),
-      weekly: questsData.filter((q) => q.frequency === "WEEKLY"),
-      monthly: questsData.filter((q) => q.frequency === "MONTHLY"),
-    }),
-    [questsData]
-  );
-
+export function QuestPanel() {
   return (
     <Card className="border-purple-900/30 py-0 overflow-hidden bg-black/60 backdrop-blur-sm h-full">
       <CardHeader className="bg-gradient-to-r flx items-center justify-center from-blue-900/30 to-purple-900/30 border-b border-purple-900/30">
@@ -26,9 +13,7 @@ export function QuestPanel({ questsData }: { questsData: Quest[] }) {
           </div>
         </CardTitle>
       </CardHeader>
-
       <CardContent className="p-4">
-        {/* Tabs Trigger */}
         <Tabs defaultValue="daily">
           <TabsList className="grid grid-cols-3 mb-4 bg-black/60 border border-purple-900/30">
             {TabsTriggerData.map((tab) => (
@@ -42,17 +27,7 @@ export function QuestPanel({ questsData }: { questsData: Quest[] }) {
             ))}
           </TabsList>
           {/* TabsContent */}
-          {Object.entries(quests).map(([key, questList]) => (
-            <TabsContent key={key} value={key} className="mt-0">
-              {questList.length > 0 ? (
-                <QuestList quests={questList} />
-              ) : (
-                <p className="text-center text-gray-400 capitalize">
-                  No {key} quests available!
-                </p>
-              )}
-            </TabsContent>
-          ))}
+          <TabsContents />
         </Tabs>
       </CardContent>
     </Card>

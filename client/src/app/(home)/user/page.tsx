@@ -1,7 +1,7 @@
 "use client";
 
-import SignOut from "@/components/LogOut";
-import { ProgressBar } from "@/components/progress-bar";
+import SignOut from "@/components/user/LogOut";
+import { ProgressBar } from "@/components/ui/progress-bar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { selectGetProfile } from "@/redux/allStateSlice";

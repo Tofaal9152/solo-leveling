@@ -24,7 +24,7 @@ export const CeateQuestAction = async (
       errors: result.error.flatten().fieldErrors,
     };
   }
-  console.log(result.data);
+
   try {
     const res = await api.post(`/quest/create`, {
       title: result.data.title,
@@ -35,7 +35,7 @@ export const CeateQuestAction = async (
       frequency: result.data.frequency,
     });
 
-    console.log(res.data);
+  
     toast.success("Quest created successfully", {
       description: "You can now view your quest in the quest board.",
     });

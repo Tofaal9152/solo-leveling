@@ -30,10 +30,3 @@ export type getProfileProps = {
   xp: number;
 };
 
-export type UpdateStatsType = {
-  Strength: number;
-  Intelligence: number;
-  Discipline: number;
-  Charisma: number;
-  Willpower: number;
-};

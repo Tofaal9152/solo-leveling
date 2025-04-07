@@ -1,10 +1,13 @@
-import { ProgressBar } from "@/components/progress-bar";
+"use client";
+import { ProgressBar } from "@/components/ui/progress-bar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getProfileProps } from "@/types/authTypes";
+import { useProfile } from "@/hooks/useProfile";
 import { Brain, Dumbbell, Flame, MessageSquare, Target } from "lucide-react";
 import { LevelUpModal } from "./level-up-modal";
 
-export function StatsPanel({ getProfile }: { getProfile: getProfileProps }) {
+export function StatsPanel() {
+  const getProfile = useProfile();
+
   const stats = [
     {
       name: "Strength",
@@ -77,7 +80,7 @@ export function StatsPanel({ getProfile }: { getProfile: getProfileProps }) {
           ))}
         </div>
 
-        <LevelUpModal getProfile={getProfile} />
+        <LevelUpModal />
       </CardContent>
     </Card>
   );

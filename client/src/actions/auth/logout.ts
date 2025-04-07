@@ -5,7 +5,7 @@ import { toast } from "sonner";
 export const LogOutAction = async () => {
   try {
     const res = await api.post("/auth/logout/");
-    console.log(res);
+    
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
     toast.success("You have been logged out");

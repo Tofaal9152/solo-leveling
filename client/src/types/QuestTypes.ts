@@ -28,3 +28,11 @@ export type QuestStatusFormData = {
     formError?: string[];
   };
 };
+
+export type StatPoints = {
+  Strength: number;
+  Intelligence: number;
+  Discipline: number;
+  Charisma: number;
+  Willpower: number;
+};

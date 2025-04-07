@@ -1,7 +1,7 @@
 "use client";
 
-import { HealthBar } from "@/components/health-bar";
-import { ProgressBar } from "@/components/progress-bar";
+import { HealthBar } from "@/components/Sidebar/Header/health-bar";
+import { ProgressBar } from "@/components/ui/progress-bar";
 import { selectGetProfile } from "@/redux/allStateSlice";
 import { useAppSelector } from "@/redux/hooks";
 

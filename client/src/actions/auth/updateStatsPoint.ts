@@ -1,5 +1,6 @@
 import api from "@/lib/api";
-import { UpdateStatsType } from "@/types/authTypes";
+import { StatPoints } from "@/types/QuestTypes";
+
 import axios from "axios";
 
 import { toast } from "sonner";
@@ -12,7 +13,7 @@ type UpdateProps = {
 export const UpdateStatsAction = async ({
   statPoints,
 }: {
-  statPoints: UpdateStatsType;
+  statPoints: StatPoints;
 }): Promise<UpdateProps> => {
   try {
     const res = await api.put(`/auth/update-stats/`, {
@@ -22,7 +23,7 @@ export const UpdateStatsAction = async ({
       statCharisma: statPoints.Charisma,
       statWillpower: statPoints.Willpower,
     });
-    console.log(res);
+
     toast.success("Stats updated successfully!");
     return {
       success: true,

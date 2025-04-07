@@ -1,3 +1,4 @@
+"use client";
 import { useEffect } from "react";
 import GetUsersQuest from "@/actions/quest/userCreatedQuest";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";

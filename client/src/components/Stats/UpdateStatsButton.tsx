@@ -1,18 +1,17 @@
 "use client";
-
 import { UpdateStatsAction } from "@/actions/auth/updateStatsPoint";
 import { setProfilRefresh } from "@/redux/allStateSlice";
 import { useAppDispatch } from "@/redux/hooks";
-import { UpdateStatsType } from "@/types/authTypes";
 import { Loader } from "lucide-react";
 import { useActionState, useEffect } from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
+import { StatPoints } from "@/types/QuestTypes";
 
 const UpdateStatsButton = ({
   statPoints,
   setStatPoints,
 }: {
-  statPoints: UpdateStatsType;
+  statPoints: StatPoints;
   setStatPoints: any;
 }) => {
   const dispatch = useAppDispatch();

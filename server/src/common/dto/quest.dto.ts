@@ -1,5 +1,5 @@
 import { Frequency, Status } from '@prisma/client';
-import { IsDefined, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateIf } from 'class-validator';
+import { IsDefined, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, ValidateIf } from 'class-validator';
 
 export class CreateQuestDto {
   @IsString()
@@ -22,7 +22,7 @@ export class CreateQuestDto {
   @IsNotEmpty()
   healthPoints: number;
 
-  // @IsEnum(Frequency)
+  @IsEnum(Frequency)
   frequency: Frequency; 
 }
 
@@ -47,11 +47,11 @@ export class UpdateQuestDto {
   @IsOptional()
   healthPoints?: number;
 
-  // @IsEnum(Frequency)
+  @IsEnum(Frequency)
   @IsOptional()
   frequency?: Frequency;
 
-  // @IsEnum(Status)
+  @IsEnum(Status)
   @IsOptional()
   status?: Status;
 
@@ -66,7 +66,7 @@ export class UpdateQuestDto {
 }
 
 export class updateQuestStatusDto {
-  // @IsEnum(Status)
+  @IsEnum(Status)
   @IsNotEmpty()
   status: Status;
 }

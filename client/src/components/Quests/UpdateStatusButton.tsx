@@ -1,8 +1,8 @@
 "use client";
 import { UpdateQuestStatusAction } from "@/actions/quest/updateQuestStatus";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { useActionState, useEffect } from "react";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
 import { useAppDispatch } from "@/redux/hooks";
 import { setProfilRefresh } from "@/redux/allStateSlice";
 import { Quest } from "@/types/QuestTypes";
