@@ -23,8 +23,7 @@ export class CreateQuestDto {
   healthPoints: number;
 
   @IsEnum(Frequency)
-  @IsNotEmpty()
-  frequency: Frequency;
+  frequency: Frequency; 
 }
 
 export class UpdateQuestDto {
@@ -48,16 +47,18 @@ export class UpdateQuestDto {
   @IsOptional()
   healthPoints?: number;
 
-  @IsEnum(Frequency )
+  @IsEnum(Frequency)
   @IsOptional()
   frequency?: Frequency;
 
-  @IsEnum(Status )
+  @IsEnum(Status)
   @IsOptional()
   status?: Status;
 
   // Ensure at least one field is provided for the update
-  @ValidateIf((dto: Partial<UpdateQuestDto>) => !dto.title && !dto.description && dto.xp === undefined && dto.statPoints === undefined && dto.healthPoints === undefined && dto.frequency === undefined && dto.status === undefined)
+  @ValidateIf((dto: Partial<UpdateQuestDto>) => {
+    return !dto.title && !dto.description && dto.xp === undefined && dto.statPoints === undefined && dto.healthPoints === undefined && dto.frequency === undefined && dto.status === undefined;
+  })
   @IsDefined({
     message: 'At least one field must be provided for update.',
   })
