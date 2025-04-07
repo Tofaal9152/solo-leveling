@@ -11,7 +11,7 @@ export const IsAuthenticatedInDashboard = ({
 }) => {
   const router = useRouter();
   const [checking, setChecking] = useState(true);
-
+ 
   useEffect(() => {
     const accessToken = localStorage.getItem("access_token");
     const refreshToken = localStorage.getItem("refresh_token");
